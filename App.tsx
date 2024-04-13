@@ -1,118 +1,80 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React from 'react'
+import { enableScreens } from 'react-native-screens'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+import 'react-native-gesture-handler';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import Home from './src/pages/home'
+import LandingPage from './src/pages/LandingPage'
+import Escola from './src/pages/escola';
+import Login from './src/pages/login';
+import NoticiasPorAluno from './src/pages/NoticiaPorAluno';
+import { TransitionSpecs } from '@react-navigation/stack';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+enableScreens()
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+const Stack = createSharedElementStackNavigator();
+// const Stack = createNativeStackNavigator();
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
+// const options = {
+//     headerShown: false,
+//     gestureEnabled: false,
+//     headerBackTitleVisible: false,
+//     transitionSpec: {
+//         open: { animation: 'timing', config: { duration: 1000 } },
+//         close: { animation: 'timing', config: { duration: 1000 } }
+//     },
+//     cardStyleInterpolator: ({ current: { progress } }) => {
+//         return {
+//             cardStyle: {
+//                 opacity: progress
+//             }
+//         }
+//     }
+// };
+
+// const Stack = createNativeStackNavigator();
+
+export default function App() {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name='Home' component={Home} options={{ headerShown: false }} />
+                <Stack.Screen name='LandingPage' component={LandingPage} options={{ headerShown: false }} />
+                <Stack.Screen name='Escola' component={Escola} options={{ headerShown: false }} />
+                <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
+                <Stack.Screen name='NoticiaPorAluno' component={NoticiasPorAluno}
+                    sharedElements={(route: any) => {
+                        const { item } = route.params;
+                        return [`item.${item.id}.photo`, item.imageUrl];
+                    }}
+                    // options={{ headerShown: false }}  
+                    options={() => ({
+                        headerShown: false,
+                        gestureEnabled: false,
+                        headerBackTitleVisible: false,
+                        transitionSpec: {
+                            open: { animation: 'timing', config: { duration: 800 } },
+                            close: { animation: 'timing', config: { duration: 800 } },
+                        },
+                        cardStyleInterpolator: ({ current: { progress } }: any) => {
+                            return {
+                                cardStyle: {
+                                    opacity: progress
+                                }
+                            }
+                        }
+                    })}
+                />
+                {/* <Stack.Group  screenOptions={{presentation: 'modal'}} >
+                    <Stack.Screen
+                        name='NoticiaPorAluno'
+                        component={NoticiasPorAluno}
+                        options={{ headerShown: false }} />
+                </Stack.Group> */}
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
 }
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
-export default App;
