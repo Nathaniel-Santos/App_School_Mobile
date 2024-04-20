@@ -10,40 +10,19 @@ import LandingPage from './src/pages/LandingPage'
 import Escola from './src/pages/escola';
 import Login from './src/pages/login';
 import NoticiasPorAluno from './src/pages/NoticiaPorAluno';
-import { TransitionSpecs } from '@react-navigation/stack';
 
 enableScreens()
 
 const Stack = createSharedElementStackNavigator();
-// const Stack = createNativeStackNavigator();
-
-// const options = {
-//     headerShown: false,
-//     gestureEnabled: false,
-//     headerBackTitleVisible: false,
-//     transitionSpec: {
-//         open: { animation: 'timing', config: { duration: 1000 } },
-//         close: { animation: 'timing', config: { duration: 1000 } }
-//     },
-//     cardStyleInterpolator: ({ current: { progress } }) => {
-//         return {
-//             cardStyle: {
-//                 opacity: progress
-//             }
-//         }
-//     }
-// };
-
-// const Stack = createNativeStackNavigator();
 
 export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name='Home' component={Home} options={{ headerShown: false }} />
                 <Stack.Screen name='LandingPage' component={LandingPage} options={{ headerShown: false }} />
                 <Stack.Screen name='Escola' component={Escola} options={{ headerShown: false }} />
                 <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
+                <Stack.Screen name='Home' component={Home} options={{ headerShown: false }} />
                 <Stack.Screen name='NoticiaPorAluno' component={NoticiasPorAluno}
                     sharedElements={(route: any) => {
                         const { item } = route.params;

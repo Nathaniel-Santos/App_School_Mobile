@@ -73,7 +73,7 @@ export default function NoticiasPorAluno(props: any) {
         if (!loading) {
             // if data has been loaded, call setInterval
             
-            if (countScroll < newsData?.imageUrl.length) {
+            if (countScroll < newsData?.imageUrl.length!) {
                 setInterval(() => {
                     // scroll flatList to next index after every 3 sec. 
                     flatListRef.current?.scrollToIndex({ animated: true, index: countIndex %19 });

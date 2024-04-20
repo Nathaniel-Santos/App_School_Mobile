@@ -36,7 +36,6 @@ export default function MainNewsCard({
   const onPressCard = async () => {
     const newsData = { id: id, title: title, text: text, date: date, imageUrl: imageUrl }
     await AsyncStorage.setItem('noticia-selected', JSON.stringify(newsData))
-    // secureLocalStorage.setItem('noticia-selected', newsData)
     // navigation.navigate('NoticiaPorAluno', { item: id + '1' })
     navigation.navigate('NoticiaPorAluno')
   }

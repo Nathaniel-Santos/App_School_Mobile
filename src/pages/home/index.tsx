@@ -1,9 +1,10 @@
-import { SafeAreaView, View, Text, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator, SafeAreaViewBase, Button } from 'react-native';
+import { SafeAreaView, View, Text, ScrollView, TouchableOpacity, Button } from 'react-native';
 import MainNewsCard from '../../components/main-news-card';
 import SecondaryNewsCard from '../../components/secondary-news-card';
-import Animated from 'react-native-reanimated';
+// import Animated from 'react-native-reanimated';
 import styles from './styles';
 import FormatDate from '../../utils/FormatDateNews';
+import UserHeader from '../../components/user-header';
 import Header from '../../components/header';
 
 type IThumb = {
@@ -29,12 +30,13 @@ const imagesUrl = [
     'https://live.staticflickr.com/3868/14566055790_f191cb7ba5_b.jpg'
 ]
 
+const randomText = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam reprehenderit dolorem sit quasi ipsum dolorum aperiam ex repellat possimus quam fugit aspernatur dolores, natus esse tempore ea. Id, excepturi esse?'
 
 const imagesUrlSec = [
-    {id: '1', image: 'https://live.staticflickr.com/3868/14566055790_f191cb7ba5_b.jpg'},
-    {id: '2', image: 'https://live.staticflickr.com/3868/14566055790_f191cb7ba5_b.jpg'},
-    {id: '3', image: 'https://live.staticflickr.com/3868/14566055790_f191cb7ba5_b.jpg'},
-    {id: '4', image: 'https://live.staticflickr.com/3868/14566055790_f191cb7ba5_b.jpg'}
+    { id: '1', image: 'https://live.staticflickr.com/3868/14566055790_f191cb7ba5_b.jpg' },
+    { id: '2', image: 'https://live.staticflickr.com/3868/14566055790_f191cb7ba5_b.jpg' },
+    { id: '3', image: 'https://live.staticflickr.com/3868/14566055790_f191cb7ba5_b.jpg' },
+    { id: '4', image: 'https://live.staticflickr.com/3868/14566055790_f191cb7ba5_b.jpg' }
 ]
 
 export default function Home({ navigation }: any) {
@@ -42,6 +44,7 @@ export default function Home({ navigation }: any) {
     return (
         <SafeAreaView style={styles.safeAreaContainer} >
 
+            <UserHeader />
             <Header />
 
             <MainNewsCard
@@ -74,7 +77,7 @@ export default function Home({ navigation }: any) {
             <ScrollView showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false} >
                 <SecondaryNewsCard
-                    text='Meu texto aqui'
+                    text={randomText}
                     Key='124'
                     date={FormatDate('2024-04-09')}
                     description='Minha descrição aqui'
@@ -84,8 +87,8 @@ export default function Home({ navigation }: any) {
                     key={'2'}
                     navigation={navigation}
                     tag='Comunicado' />
-                    
-            {/* <Button title='Ir para LandingPage' onPress={() => navigation.navigate('LandingPage')} /> */}
+
+                {/* <Button title='Ir para LandingPage' onPress={() => navigation.navigate('LandingPage')} /> */}
             </ScrollView>
 
 

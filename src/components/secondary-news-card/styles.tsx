@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import getFontSize from "../../utils/getFontSize";
 import { Dimensions } from "react-native";
 
-const {width, height} = Dimensions.get('screen')
+const { width, height } = Dimensions.get('screen')
 
 const styles = StyleSheet.create({
     image: {
@@ -73,7 +73,30 @@ const styles = StyleSheet.create({
         color: 'rgba(114, 122, 143, 0.7)',
         fontSize: getFontSize(12),
     },
-
+    modal: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        paddingTop: height * 0.05
+    },
+    modalContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: height - 200,
+        width: width - 20,
+        backgroundColor: 'white',
+        borderRadius: 15,
+    },
+    shadowProp: {
+        shadowColor: '#282828',
+        shadowOffset: { width: -2, height: 4 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+    },
+    elevation: {
+        elevation: 20,
+    }
 })
 
 export default styles
